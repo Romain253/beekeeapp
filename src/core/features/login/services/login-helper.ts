@@ -429,23 +429,10 @@ export class CoreLoginHelperProvider {
      * @returns Path and params.
      */
     async getAddSiteRouteInfo(showKeyboard?: boolean): Promise<[string, Params]> {
-        if (CoreConstants.CONFIG.demoMode) {
-            const demoModeSite = this.getDemoModeSiteInfo();
-
-            if (demoModeSite) {
-                return ['/login/credentials', { siteUrl: demoModeSite.url }];
-            }
-        }
-
-        const sites = await this.getAvailableSites();
-
-        if (sites.length === 1) {
-            // Fixed URL is set, go to credentials page.
-            return ['/login/credentials', { siteUrl: sites[0].url }];
-        }
-
-        return ['/login/site', { showKeyboard }];
+    const defaultSiteUrl = 'https://moodle-demo.beekee.ch'; // ton serveur
+    return ['/login/credentials', { siteUrl: defaultSiteUrl }];
     }
+
 
     /**
      * Convenient helper to handle authentication in the app using a token received by SSO login. If it's a new account,

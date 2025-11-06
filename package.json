@@ -41,7 +41,9 @@
         "postinstall": "patch-package && cd cordova-plugin-moodleapp && npm install",
         "lang:update-langpacks": "./scripts/update_langpacks.sh",
         "lang:detect-langpacks": "./scripts/update_langpacks.sh detect",
-        "lang:create-langindex": "./scripts/create_langindex.sh"
+        "lang:create-langindex": "./scripts/create_langindex.sh",
+        "build:apk": "rm -rf www && ionic build -- --base-href ./ && cordova prepare android && cordova build android --debug",
+        "build:aab": "rm -rf www && ionic build -- --base-href ./ && cordova prepare android && (cd platforms/android && ./gradlew --stop && ./gradlew clean) || true && cordova build android --release --packageType=bundle --buildConfig=build.json"
     },
     "dependencies": {
         "@angular/animations": "20.3.2",
